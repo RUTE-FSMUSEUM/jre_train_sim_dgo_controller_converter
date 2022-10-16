@@ -2,7 +2,7 @@
 
 ## 暫定リリースについて
 * 【近日更新予定】お急ぎの方は、Issue #1 にあるファイルをご利用ください（v0.3.4から、暫定的にJC-PS101**以外のコントローラは取り外して**いただく形を取っています）
-* 自分の環境では動いたものは[こちら](https://fsmuseum.net/souvenir/trainsimutil/DGoController2KeyPress.zip)または[Release](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/tag/v0.0.0)で公開しています
+* 自分の環境では動いたものは[こちら](https://fsmuseum.net/souvenir/trainsimutil/DgoConverter.noGUID.0.3.5.zip)または[Release](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/tag/v0.3.5)で公開しています
 * PS1時代の**電車でGO！コントローラ（ワンハンドルタイプ）＋JC-PS101**の組み合わせで動作します（はずです）
 * コントローラを動かすと、[Q]、[Z]、[S]、[1]などがキー入力されます（メモ帳などで入力結果は確認できます）
 * DirectInputの再配布可能なsampleコードをベースにそれを改変して、実装しています（ソースコードは、整理してからアップします、予定です）
