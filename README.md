@@ -1,6 +1,6 @@
 # JR EAST Train Simulator | JR東日本トレインシミュレータ - PS1 電車でGO! コントローラ 入力変換ソフトウェア (JC-PS101使用)
 最新版：**v0.4.2** </br></br>
-JC-PS101 からの出力信号を変換し、特定のキー入力を行うソフトウェア、DgoConverter のリポジトリです</br>
+JC-PS101 からの信号を変換し、特定のキー入力を行うソフトウェア、DgoConverter のリポジトリです</br>
 <img width="256" src="https://user-images.githubusercontent.com/63990380/197386814-8b8bcbe2-3951-4ad6-9642-4d5e08120262.png"></img></br>
 **▲ GUI例**</br>
 
