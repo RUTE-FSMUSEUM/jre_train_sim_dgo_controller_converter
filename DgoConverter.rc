@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// ??? (??) resources
+// ì˙ñ{åÍ (ì˙ñ{) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
@@ -57,12 +57,12 @@ BEGIN
     END
 END
 
-#endif    // ??? (??) resources
+#endif    // ì˙ñ{åÍ (ì˙ñ{) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ?? (??) resources
+// âpåÍ (ïƒçë) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -73,45 +73,45 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Dialog
 //
 
-IDD_JOYST_IMM DIALOGEX 0, 0, 190, 212
+IDD_JOYST_IMM DIALOGEX 0, 0, 214, 240
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dgo Converter "
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "E&xit",IDCANCEL,156,191,27,14
+    DEFPUSHBUTTON   "E&xit",IDCANCEL,180,219,27,14
     LTEXT           "Target:",IDC_KEYMAP_TEXT,7,10,115,8
     COMBOBOX        IDC_COMBOBOX_KEYMAP,7,20,115,100,CBS_DROPDOWNLIST | WS_VSCROLL
     LTEXT           "Device:",IDC_DEVICE_LIST_TEXT,7,36,114,8
     COMBOBOX        IDC_COMBOBOX_DEVICE_LIST,7,46,115,100,CBS_DROPDOWNLIST | WS_VSCROLL
-    LTEXT           "X Axis:",IDC_X_AXIS_TEXT,18,78,22,8,WS_DISABLED
-    LTEXT           "Y Axis:",IDC_Y_AXIS_TEXT,18,89,22,8,WS_DISABLED
-    LTEXT           "Z Axis:",IDC_Z_AXIS_TEXT,18,100,22,8,WS_DISABLED
-    LTEXT           "Buttons:",IDC_STATIC,18,159,27,8
-    LTEXT           "Est. mascon state:",IDC_STATIC_STATE,18,174,76,8
-    LTEXT           "X Rotation:",IDC_X_ROT_TEXT,18,115,36,8,WS_DISABLED
-    LTEXT           "POV 0:",IDC_POV0_TEXT,100,104,24,8,WS_DISABLED
-    GROUPBOX        "Dgo Controller State",IDC_STATIC,7,63,176,124
-    LTEXT           "0",IDC_X_AXIS,63,78,21,8,WS_DISABLED
-    LTEXT           "0",IDC_Y_AXIS,63,89,21,8,WS_DISABLED
-    LTEXT           "0",IDC_Z_AXIS,63,100,21,8,WS_DISABLED
-    LTEXT           "",IDC_BUTTONS,54,159,120,8
-    LTEXT           "",IDC_MASCON_STATE,82,174,90,8
-    LTEXT           "0",IDC_X_ROT,63,115,21,8,WS_DISABLED
-    LTEXT           "0",IDC_POV0,135,104,21,8,WS_DISABLED
-    LTEXT           "Y Rotation:",IDC_Y_ROT_TEXT,18,126,36,8,WS_DISABLED
-    LTEXT           "0",IDC_Y_ROT,63,126,21,8,WS_DISABLED
-    LTEXT           "Z Rotation:",IDC_Z_ROT_TEXT,18,137,36,8,WS_DISABLED
-    LTEXT           "0",IDC_Z_ROT,63,137,21,8,WS_DISABLED
-    LTEXT           "Slider 0:",IDC_SLIDER0_TEXT,100,78,26,8,WS_DISABLED
-    LTEXT           "0",IDC_SLIDER0,135,78,21,8,WS_DISABLED
-    LTEXT           "Slider 1:",IDC_SLIDER1_TEXT,100,89,26,8,WS_DISABLED
-    LTEXT           "0",IDC_SLIDER1,135,89,21,8,WS_DISABLED
-    LTEXT           "POV 1:",IDC_POV1_TEXT,100,115,24,8,WS_DISABLED
-    LTEXT           "0",IDC_POV1,135,115,21,8,WS_DISABLED
-    LTEXT           "POV 2:",IDC_POV2_TEXT,100,126,24,8,WS_DISABLED
-    LTEXT           "0",IDC_POV2,135,126,21,8,WS_DISABLED
-    LTEXT           "POV 3:",IDC_POV3_TEXT,100,137,24,8,WS_DISABLED
-    LTEXT           "0",IDC_POV3,135,137,21,8,WS_DISABLED
+    LTEXT           "X Axis:",IDC_X_AXIS_TEXT,18,110,22,8,WS_DISABLED
+    LTEXT           "Y Axis:",IDC_Y_AXIS_TEXT,18,121,22,8,WS_DISABLED
+    LTEXT           "Z Axis:",IDC_Z_AXIS_TEXT,18,132,22,8,WS_DISABLED
+    LTEXT           "Buttons:",IDC_STATIC,18,191,27,8
+    LTEXT           "Est. mascon state:",IDC_STATIC_STATE,18,206,76,8
+    LTEXT           "X Rotation:",IDC_X_ROT_TEXT,18,147,36,8,WS_DISABLED
+    LTEXT           "POV 0:",IDC_POV0_TEXT,100,136,24,8,WS_DISABLED
+    GROUPBOX        "Dgo Controller State",IDC_STATIC,7,95,200,124
+    LTEXT           "0",IDC_X_AXIS,63,110,21,8,WS_DISABLED
+    LTEXT           "0",IDC_Y_AXIS,63,121,21,8,WS_DISABLED
+    LTEXT           "0",IDC_Z_AXIS,63,132,21,8,WS_DISABLED
+    LTEXT           "",IDC_BUTTONS,54,191,120,8
+    LTEXT           "",IDC_MASCON_STATE,82,206,90,8
+    LTEXT           "0",IDC_X_ROT,63,147,21,8,WS_DISABLED
+    LTEXT           "0",IDC_POV0,135,136,21,8,WS_DISABLED
+    LTEXT           "Y Rotation:",IDC_Y_ROT_TEXT,18,158,36,8,WS_DISABLED
+    LTEXT           "0",IDC_Y_ROT,63,158,21,8,WS_DISABLED
+    LTEXT           "Z Rotation:",IDC_Z_ROT_TEXT,18,169,36,8,WS_DISABLED
+    LTEXT           "0",IDC_Z_ROT,63,169,21,8,WS_DISABLED
+    LTEXT           "Slider 0:",IDC_SLIDER0_TEXT,100,110,26,8,WS_DISABLED
+    LTEXT           "0",IDC_SLIDER0,135,110,21,8,WS_DISABLED
+    LTEXT           "Slider 1:",IDC_SLIDER1_TEXT,100,121,26,8,WS_DISABLED
+    LTEXT           "0",IDC_SLIDER1,135,121,21,8,WS_DISABLED
+    LTEXT           "POV 1:",IDC_POV1_TEXT,100,147,24,8,WS_DISABLED
+    LTEXT           "0",IDC_POV1,135,147,21,8,WS_DISABLED
+    LTEXT           "POV 2:",IDC_POV2_TEXT,100,158,24,8,WS_DISABLED
+    LTEXT           "0",IDC_POV2,135,158,21,8,WS_DISABLED
+    LTEXT           "POV 3:",IDC_POV3_TEXT,100,169,24,8,WS_DISABLED
+    LTEXT           "0",IDC_POV3,135,169,21,8,WS_DISABLED
 END
 
 
@@ -126,9 +126,9 @@ BEGIN
     IDD_JOYST_IMM, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 183
+        RIGHTMARGIN, 207
         TOPMARGIN, 7
-        BOTTOMMARGIN, 205
+        BOTTOMMARGIN, 233
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -191,7 +191,7 @@ BEGIN
     0
 END
 
-#endif    // ?? (??) resources
+#endif    // âpåÍ (ïƒçë) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
