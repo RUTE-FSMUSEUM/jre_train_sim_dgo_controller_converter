@@ -32,6 +32,58 @@ typedef struct KeyInfo {
 	KEYCONFIG KEY;
 }KEYINFO;
 
+typedef struct TriggerAxis {
+	WORD EB;
+	WORD B8;
+	WORD B7;
+	WORD B6;
+	WORD B5;
+	WORD B4;
+	WORD B3;
+	WORD B2;
+	WORD B1;
+	WORD NT;
+	WORD P1;
+	WORD P2;
+	WORD P3;
+	WORD P4;
+	WORD P5;
+	WORD A;
+	WORD B;
+	WORD C;
+	WORD START;
+	WORD SELECT;
+}TRIGAX;
+
+typedef struct TriggerButton {
+	WORD EB;
+	WORD B8;
+	WORD B7;
+	WORD B6;
+	WORD B5;
+	WORD B4;
+	WORD B3;
+	WORD B2;
+	WORD B1;
+	WORD NT;
+	WORD P1;
+	WORD P2;
+	WORD P3;
+	WORD P4;
+	WORD P5;
+	WORD A;
+	WORD B;
+	WORD C;
+	WORD START;
+	WORD SELECT;
+}TRIGBT;
+
+typedef struct KeyTriggerInfo {
+	WCHAR NAME[NAME_SIZE];
+	TRIGAX AX;
+	TRIGBT BT;
+}KEYTRIGGERINFO;
+
 typedef struct ButtonState {
 	bool A;
 	bool B;
