@@ -38,6 +38,8 @@
 #define IDC_COMBOBOX_KEYMAP             1048
 #define IDC_DEVICE_LIST_TEXT				1049
 #define IDC_COMBOBOX_DEVICE_LIST			1050
+#define IDC_TRIGGERMAP_TEXT             1051
+#define IDC_COMBOBOX_TRIGGERMAP         1052
 
 // Next default values for new objects
 // 
