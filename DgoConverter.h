@@ -55,12 +55,26 @@ typedef struct TriggerCondition {
 	WORD SELECT;
 }TRIGCOND;
 
+typedef struct ButtonForMascon {
+	bool BT0;
+	bool BT1;
+	bool BT2;
+	bool BT3;
+	bool BT4;
+	bool BT5;
+	bool BT6;
+	bool BT7;
+	bool BT8;
+	bool BT9;
+}ISMASCONBT;
+
 typedef struct KeyTriggerInfo {
 	WCHAR NAME[NAME_SIZE];
 	TRIGCOND AX_X;
 	TRIGCOND AX_Y;
 	TRIGCOND AX_Z;
 	TRIGCOND BT;
+	ISMASCONBT ISMASCON;
 }KEYTRIGGERINFO;
 
 typedef struct ButtonState {
