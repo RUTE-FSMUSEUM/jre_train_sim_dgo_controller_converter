@@ -74,7 +74,7 @@ typedef struct KeyTriggerInfo {
 	TRIGCOND AX_Y;
 	TRIGCOND AX_Z;
 	TRIGCOND BT;
-	ISMASCONBT ISMASCON;
+	ISMASCONBT ISMASCON; // マスコンの位置がAXISではなくボタンでも表現されるJC-PS101Uのためだけに作ったconfigで、もっと良い方法はないのか模索中
 }KEYTRIGGERINFO;
 
 typedef struct ButtonState {
