@@ -109,7 +109,7 @@ JC-PS101 / ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラ
 * TAITO 電車でGO! コントローラ PS (ツーハンドルタイプ)
 * ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラー for Nintendo Switch
 ### ゲーム
-* JR EAST TRAIN SIMULATOR (Build ID 9531495)
+* JR EAST TRAIN SIMULATOR (Build ID 9939284)
 
 ## 謝辞
 * 理解しやすく使いやすいサンプルコードを配布してくださっている Microsoft 社の DirectX 開発チームへ
