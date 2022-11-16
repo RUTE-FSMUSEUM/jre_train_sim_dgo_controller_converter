@@ -45,6 +45,9 @@ HRESULT UpdateInputState(HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYC
 VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
 VOID makeMasconKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
 VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap);
+bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap);
+bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues);
+bool validateNonMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues);
 
 // Stuff to filter out XInput devices
 #include <wbemidl.h>
@@ -1169,6 +1172,212 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 		buttonState->SELECT = FALSE;
 	}
 
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: validateMasconState()
+// Desc: Validate Joystick Button Inputs based on a trigger map.
+//-----------------------------------------------------------------------------
+bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap)
+{
+	if ( wcscmp( validateState, L"EB" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.EB, triggermap->AX_Y.EB, triggermap->AX_Z.EB, triggermap->BT.EB };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B8" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B8, triggermap->AX_Y.B8, triggermap->AX_Z.B8, triggermap->BT.B8 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B7" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B7, triggermap->AX_Y.B7, triggermap->AX_Z.B7, triggermap->BT.B7 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B6" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B6, triggermap->AX_Y.B6, triggermap->AX_Z.B6, triggermap->BT.B6 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B5" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B5, triggermap->AX_Y.B5, triggermap->AX_Z.B5, triggermap->BT.B5 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B4" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B4, triggermap->AX_Y.B4, triggermap->AX_Z.B4, triggermap->BT.B4 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B3" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B3, triggermap->AX_Y.B3, triggermap->AX_Z.B3, triggermap->BT.B3 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B2" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B2, triggermap->AX_Y.B2, triggermap->AX_Z.B2, triggermap->BT.B2 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B1" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B1, triggermap->AX_Y.B1, triggermap->AX_Z.B1, triggermap->BT.B1 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"NT" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.NT, triggermap->AX_Y.NT, triggermap->AX_Z.NT, triggermap->BT.NT };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"P1" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P1, triggermap->AX_Y.P1, triggermap->AX_Z.P1, triggermap->BT.P1 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"P2" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P2, triggermap->AX_Y.P2, triggermap->AX_Z.P2, triggermap->BT.P2 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"P3" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P3, triggermap->AX_Y.P3, triggermap->AX_Z.P3, triggermap->BT.P3 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"P4" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P4, triggermap->AX_Y.P4, triggermap->AX_Z.P4, triggermap->BT.P4 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"P5" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P5, triggermap->AX_Y.P5, triggermap->AX_Z.P5, triggermap->BT.P5 };
+		return validateMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"A" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.A, triggermap->AX_Y.A, triggermap->AX_Z.A, triggermap->BT.A };
+		return validateNonMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"B" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B, triggermap->AX_Y.B, triggermap->AX_Z.B, triggermap->BT.B };
+		return validateNonMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"C" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.C, triggermap->AX_Y.C, triggermap->AX_Z.C, triggermap->BT.C };
+		return validateNonMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"START" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.START, triggermap->AX_Y.START, triggermap->AX_Z.START, triggermap->BT.START };
+		return validateNonMasconInputs(js, buttonStrText, triggerValues);
+	}
+	if ( wcscmp( validateState, L"SELECT" ) == 0 )
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.SELECT, triggermap->AX_Y.SELECT, triggermap->AX_Z.SELECT, triggermap->BT.SELECT };
+		return validateNonMasconInputs(js, buttonStrText, triggerValues);
+	}
+	return FALSE;
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: validateMasconInputs()
+// Desc: Validate Input (AX_X, AX_Y, AX_Z, Buttons etc.) for Mascon.
+//-----------------------------------------------------------------------------
+bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
+{
+	validateInputResult result[NUM_VALIDATE] = { NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED }; // { AX_X, AX_Y, AX_Z, BT }
+
+	// TODO: 型変換可能か確認
+	// Validate AX_X
+	if ( wcscmp( triggerValues.AX_X , NOT_IN_USE ) == 0 )
+		result[0] = NOT_ASSIGNED;
+	else if ( js.lX == _wtol(triggerValues.AX_X) )
+		result[0] = VALIDATED;
+
+	// Validate AX_Y
+	if ( wcscmp( triggerValues.AX_Y, NOT_IN_USE ) == 0 )
+		result[1] = NOT_ASSIGNED;
+	else if ( js.lY == _wtol(triggerValues.AX_Y) )
+		result[1] = VALIDATED;
+
+	// Validate AX_Z
+	if ( wcscmp( triggerValues.AX_Z, NOT_IN_USE ) == 0 )
+		result[2] = NOT_ASSIGNED;
+	else if ( js.lZ == _wtol(triggerValues.AX_Z) )
+		result[2] = VALIDATED;
+
+	// Validate BT (Buttons)
+	if ( wcscmp( triggerValues.BT, NOT_IN_USE ) == 0 )
+		result[3] = NOT_ASSIGNED;
+	else if ( wcscmp( buttonStrText, triggerValues.BT ) == 0 )
+		result[3] = VALIDATED;
+
+	// Judgement
+	int NUM_NOT_ASSIGNED = 0;
+	for (int i = 0; i < NUM_VALIDATE; i++)
+	{
+		if (result[i] == NOT_VALIDATED)
+			return FALSE;
+		if ( result[i] == NOT_ASSIGNED )
+			NUM_NOT_ASSIGNED++;
+		if (NUM_NOT_ASSIGNED == NUM_VALIDATE)
+			return FALSE;
+	}
+	return TRUE;
+}
+
+
+//-----------------------------------------------------------------------------
+// Name: validateNonMasconInputs()
+// Desc: Validate Input (AX_X, AX_Y, AX_Z, Buttons etc.) for Mascon.
+//-----------------------------------------------------------------------------
+bool validateNonMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
+{
+	validateInputResult result[NUM_VALIDATE] = { NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED }; // { AX_X, AX_Y, AX_Z, BT }
+
+	// TODO: 型変換可能か確認
+	// Validate AX_X
+	if ( wcscmp( triggerValues.AX_X, NOT_IN_USE ) == 0 )
+		result[0] = NOT_ASSIGNED;
+	else if (js.lX == _wtol(triggerValues.AX_X))
+		result[0] = VALIDATED;
+
+	// Validate AX_Y
+	if ( wcscmp( triggerValues.AX_Y, NOT_IN_USE ) == 0 )
+		result[1] = NOT_ASSIGNED;
+	else if (js.lY == _wtol(triggerValues.AX_Y))
+		result[1] = VALIDATED;
+
+	// Validate AX_Z
+	if ( wcscmp( triggerValues.AX_Z, NOT_IN_USE ) == 0 )
+		result[2] = NOT_ASSIGNED;
+	else if (js.lZ == _wtol(triggerValues.AX_Z))
+		result[2] = VALIDATED;
+
+	// Validate BT (Buttons)
+	if ( wcscmp( triggerValues.BT, NOT_IN_USE ) == 0 )
+		result[3] = NOT_ASSIGNED;
+	else if ( wcschr( buttonStrText, *(triggerValues.BT) ) != NULL )
+		result[3] = VALIDATED;
+
+	// Judgement
+	int NUM_NOT_ASSIGNED = 0;
+	for (int i = 0; i < NUM_VALIDATE; i++)
+	{
+		if (result[i] == NOT_VALIDATED)
+			return FALSE;
+		if (result[i] == NOT_ASSIGNED)
+			NUM_NOT_ASSIGNED++;
+		if (NUM_NOT_ASSIGNED == NUM_VALIDATE)
+			return FALSE;
+	}
+	return TRUE;
 }
 
 
