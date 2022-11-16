@@ -74,7 +74,7 @@ JC-PS101 / ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラ
 3. 本ソフトウェア（DgoConverter.exe）を起動
 4. Device: から **One Handle MasCon for Nintendo Switch** を選択
 6. Event Trigger Map:から **ZUIKI One Handle Mascon** を選択
-7. これより先は、[こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/edit/main/README.md#hmmsim-metro)の 7. 以降をご覧ください
+7. これより先は、[こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter#hmmsim-metro)の 7. 以降をご覧ください
 * ただし、JC-PS101＋電車でGO！コントローラとは異なり、Y ボタンに加速を緩める、B ボタンに空気笛、- ボタンに DSD を設定しています
 
 ## 注意点
