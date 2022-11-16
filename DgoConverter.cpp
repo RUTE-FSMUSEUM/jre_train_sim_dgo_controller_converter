@@ -216,7 +216,7 @@ INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam 
 
             // Set a timer to go off 30 times a second. At every timer message
             // the input device will be read
-            SetTimer( hDlg, 0, 1000 / 30, NULL );
+            SetTimer( hDlg, 0, 1000 / 100, NULL );
             return TRUE;
 
         case WM_ACTIVATE:
