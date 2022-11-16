@@ -12,6 +12,9 @@
 const int NAME_SIZE = 128;
 const int NUM_BUTTONS = 10;
 const WCHAR* NOT_IN_USE = L"N/A";
+const int NUM_VALIDATE = 4;
+
+enum validateInputResult { NOT_VALIDATED, VALIDATED, NOT_ASSIGNED };
 
 typedef struct KeyConfig {
 	WORD EB;
@@ -65,6 +68,13 @@ typedef struct KeyTriggerInfo {
 	TRIGCOND_WCHAR BT;
 	bool isExclusiveButton[NUM_BUTTONS]; // マスコンの位置がAXISではなくボタンでも表現されるJC-PS101Uのためだけに作ったconfigで、もっと良い方法はないのか模索中
 }KEYTRIGGERINFO;
+
+typedef struct TriggerInfoForOneKey {
+	const WCHAR* AX_X;
+	const WCHAR* AX_Y;
+	const WCHAR* AX_Z;
+	const WCHAR* BT;
+}TRIGGERVALUES;
 
 typedef struct ButtonState {
 	bool A;
