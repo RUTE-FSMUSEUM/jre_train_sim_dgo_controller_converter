@@ -41,10 +41,10 @@ BOOL CALLBACK    EnumJoysticksCallback( const DIDEVICEINSTANCE* pdidInstance, VO
 HRESULT InitDirectInput( HWND hDlg );
 VOID FreeDirectInput();
 HRESULT SwitchJoystick(HWND hDlg, GUID guidInstance);
-HRESULT UpdateInputState(HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
-VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const long x_axis, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
-VOID makeMasconKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const long x_axis, TCHAR* state, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
-VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, BUTTONSTATE* buttonState, KEYCONFIG* keymap);
+HRESULT UpdateInputState(HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown);
+VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
+VOID makeMasconKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
+VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap);
 
 // Stuff to filter out XInput devices
 #include <wbemidl.h>
@@ -93,8 +93,43 @@ KEYINFO keyinfo[] = {
 	{ L"HMMSIM METRO", { VK_OEM_PERIOD, VK_OEM_COMMA, 0x41, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a, NULL, 0x41, 0x00, VK_RETURN, 0x00, VK_SPACE }},
 };
 const int keyinfo_len = sizeof(keyinfo) / sizeof(KEYINFO);
-WPARAM index; // Selection item index
-WPARAM idx_currentDevice; // Selection item index for devices
+// Key trigger conditions
+KEYTRIGGERINFO triggermap[] = {
+	{ L"JC-PS101U", 
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"24", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"3", L"2", L"1", L"8", L"9" },
+      { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
+	},
+	{ L"JC-PS101U - late",
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"-8", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"3", L"2", L"1", L"8", L"9" },
+	  { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
+	},
+	{ L"ZUIKI One Handle Mascon",
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"1", L"2", L"9", L"8" },
+	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE }
+	}
+	/*
+	{ L"DEBUG",
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }
+	}
+	*/
+};
+const int triggermap_len = sizeof(triggermap) / sizeof(KEYTRIGGERINFO);
+WPARAM index; // Selected item index for key mapping
+WPARAM idx_currentDevice; // Selected item index for devices
+WPARAM idx_currentTriggerMap; // Selected item index for key trigger map
 
 
 
@@ -169,6 +204,12 @@ INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam 
 				if (i == idx_deviceInfo - 1)
 					idx_currentDevice = SendMessage(GetDlgItem(hDlg, IDC_COMBOBOX_DEVICE_LIST), CB_SETCURSEL, current_index, 0); // Select default
 			}
+			// Add items: key trigger map
+			for (int i = 0; i < triggermap_len; i++) {
+				WPARAM current_index = SendMessage(GetDlgItem(hDlg, IDC_COMBOBOX_TRIGGERMAP), CB_ADDSTRING, 0, (LPARAM)triggermap[i].NAME);
+				if (i == 0)
+					idx_currentTriggerMap = SendMessage(GetDlgItem(hDlg, IDC_COMBOBOX_TRIGGERMAP), CB_SETCURSEL, current_index, 0); // Select default
+			}
 
             // Set a timer to go off 30 times a second. At every timer message
             // the input device will be read
@@ -185,7 +226,7 @@ INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam 
 
         case WM_TIMER:
             // Update the input device every timer message
-            if( FAILED( UpdateInputState( hDlg, state, &buttonState, &keyinfo[index].KEY, wcscmp( keyinfo[index].NAME, L"HMMSIM METRO" ) == 0 ) ) )
+            if( FAILED( UpdateInputState( hDlg, state, &buttonState, &keyinfo[index].KEY, &triggermap[idx_currentTriggerMap], wcscmp( keyinfo[index].NAME, L"HMMSIM METRO" ) == 0 ) ) )
             {
                 KillTimer( hDlg, 0 );
                 MessageBox( NULL, TEXT( "Error Reading Input State. " ) \
@@ -202,6 +243,10 @@ INT_PTR CALLBACK MainDlgProc( HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam 
 				case IDC_COMBOBOX_KEYMAP:
 					if ( HIWORD( wParam ) == CBN_SELCHANGE )
 						index = SendMessage( GetDlgItem(hDlg, IDC_COMBOBOX_KEYMAP), CB_GETCURSEL, 0, 0 );
+					return TRUE;
+				case IDC_COMBOBOX_TRIGGERMAP:
+					if (HIWORD(wParam) == CBN_SELCHANGE)
+						idx_currentTriggerMap = SendMessage(GetDlgItem(hDlg, IDC_COMBOBOX_TRIGGERMAP), CB_GETCURSEL, 0, 0);
 					return TRUE;
 				case IDC_COMBOBOX_DEVICE_LIST:
 					if (HIWORD(wParam) == CBN_SELCHANGE)
@@ -664,7 +709,7 @@ HRESULT SwitchJoystick( HWND hDlg, GUID guidInstance )
 // Name: UpdateInputState()
 // Desc: Get the input device's state and display it.
 //-----------------------------------------------------------------------------
-HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
+HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown)
 {
     HRESULT hr;
     TCHAR strText[512] = {0}; // Device state text
@@ -735,20 +780,20 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEY
 
     // Fill up text with which buttons are pressed
     StringCchCopy( strText, 512, TEXT( "" ) );
-    for( int i = 0; i < 128; i++ )
+    for( int i = 0; i < NUM_BUTTONS; i++ )
     {
         if( js.rgbButtons[i] & 0x80 )
         {
             TCHAR sz[128];
             StringCchPrintf( sz, 128, TEXT( "%02d " ), i );
             StringCchCat( strText, 512, sz );
-			if ( i == 0 || i == 4 || i == 5 || i == 6 || i == 7 )
+			if ( triggermap->isExclusiveButton[i] )
 			{
 				TCHAR sz_m[128];
 				StringCchPrintf(sz_m, 128, TEXT("%02d "), i);
 				StringCchCat(masconText, 512, sz_m);
 			}
-			else if ( i == 1 || i == 2 || i == 3 || i == 8 || i == 9 )
+			else
 			{
 				TCHAR sz_b[128];
 				StringCchPrintf(sz_b, 128, TEXT("%02d "), i);
@@ -758,7 +803,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEY
     }
     SetWindowText( GetDlgItem( hDlg, IDC_BUTTONS ), strText );
 
-	makeKeyBoardOutput( masconText, buttonText, js.lX, state, buttonState, keymap, isKeymapWithHoldDown );
+	makeKeyBoardOutput( masconText, buttonText, js, state, buttonState, triggermap, keymap, isKeymapWithHoldDown );
 
     return S_OK;
 }
@@ -768,7 +813,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEY
 // Name: makeKeyBoardOutput()
 // Desc: Convert Joystick/Button Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const long x_axis, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
+VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
 {
 	// KeyBoard Output Struct
 	const int num_inputs = 6;
@@ -788,8 +833,8 @@ VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const 
 	bool isHoldDown = FALSE;
 	DWORD holdDownTime = 70;
 
-	makeMasconKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, &isHoldDown, masconText, x_axis, state, keymap, isKeymapWithHoldDown );
-	makeButtonKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, buttonText, buttonState, keymap );
+	makeMasconKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, &isHoldDown, masconText, js, state, triggermap, keymap, isKeymapWithHoldDown );
+	makeButtonKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, buttonText, js, buttonState, triggermap, keymap );
 
 	if (inputs[0].ki.wVk != keymap->NUL)
 	{
@@ -805,10 +850,11 @@ VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const 
 // Name: makeMasconKeyBoardOutput()
 // Desc: Convert Joystick Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const long x_axis, TCHAR* state, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
+VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
 {
+	const long x_axis = js.lX;
 	// EB
-	if (wcscmp(strText, L"") == 0)
+	if ( validateMasconState( L"EB", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"EB") != 0)
 			inputs[*idx_inputs].ki.wVk = keymap->EB;
@@ -816,7 +862,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = 'B';
 	}
 	// B8
-	else if ( wcscmp(strText, L"04 07 ") == 0 )
+	else if ( validateMasconState( L"B8", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"EB") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -826,7 +872,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '8';
 	}
 	// B7
-	else if ( wcscmp(strText, L"04 06 07 ") == 0 )
+	else if ( validateMasconState( L"B7", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B8") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -836,7 +882,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '7';
 	}
 	// B6
-	else if (wcscmp(strText, L"05 ") == 0)
+	else if ( validateMasconState( L"B6", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B7") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -846,7 +892,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '6';
 	}
 	// B5
-	else if (wcscmp(strText, L"05 06 ") == 0)
+	else if ( validateMasconState( L"B5", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B6") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -856,7 +902,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '5';
 	}
 	// B4
-	else if (wcscmp(strText, L"04 05 ") == 0)
+	else if ( validateMasconState( L"B4", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B5") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -866,7 +912,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '4';
 	}
 	// B3
-	else if (wcscmp(strText, L"04 05 06 ") == 0)
+	else if ( validateMasconState( L"B3", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B4") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -876,7 +922,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '3';
 	}
 	// B2
-	else if (wcscmp(strText, L"05 07 ") == 0)
+	else if ( validateMasconState( L"B2", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B3") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -886,7 +932,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 1) = '2';
 	}
 	// B1
-	else if (wcscmp(strText, L"05 06 07 ") == 0)
+	else if ( validateMasconState( L"B1", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B2") == 0)
 			inputs[*idx_inputs].ki.wVk = keymap->BDN;
@@ -895,96 +941,108 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		*(state + 0) = 'B';
 		*(state + 1) = '1';
 	}
-	// NT, P2, P4
-	else if (wcscmp(strText, L"04 05 07 ") == 0)
+	// NT
+	else if ( validateMasconState( L"NT", strText, js, triggermap ) )
 	{
-		// NT, P4 (x_axis = -1000)
-		if ( x_axis == -1000 )
+		// NT
+		if (wcscmp(state, L"B1") == 0)
 		{
-			// NT
-			if (wcscmp(state, L"B1") == 0 )
-			{
-				inputs[*idx_inputs].ki.wVk = keymap->BNT;
-				*(state + 0) = 'N';
-				*(state + 1) = 'T';
-			}
-			else if (wcscmp(state, L"P1") == 0)
-			{
-				inputs[*idx_inputs].ki.wVk = keymap->PNT;
-				*(state + 0) = 'N';
-				*(state + 1) = 'T';
-				if (isKeymapWithHoldDown)
-					*isHoldDown = TRUE;
-			}
-			// P4
-			else if (wcscmp(state, L"P3") == 0)
-			{
-				inputs[*idx_inputs].ki.wVk = keymap->PDN;
-				*(state + 0) = 'P';
-				*(state + 1) = '4';
-				if (isKeymapWithHoldDown)
-					*isHoldDown = TRUE;
-			}
-			else if ( wcscmp(state, L"P5") == 0 )
-			{
-				if ( !isKeymapWithHoldDown )
-					inputs[*idx_inputs].ki.wVk = keymap->PUP;
-				*(state + 0) = 'P';
-				*(state + 1) = '4';
-			}
-				
+			inputs[*idx_inputs].ki.wVk = keymap->BNT;
+			*(state + 0) = 'N';
+			*(state + 1) = 'T';
 		}
-		// P2 (x_axis = 1000)
-		else if ((x_axis == 1000) )
+		else if (wcscmp(state, L"P1") == 0)
 		{
-			if ( wcscmp(state, L"P1") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PDN;
-			else if ( wcscmp(state, L"P3") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PUP;
-			*(state + 0) = 'P';
-			*(state + 1) = '2';
+			inputs[*idx_inputs].ki.wVk = keymap->PNT;
+			*(state + 0) = 'N';
+			*(state + 1) = 'T';
 			if (isKeymapWithHoldDown)
 				*isHoldDown = TRUE;
 		}
-	}
-	// P1, P3
-	else if (wcscmp(strText, L"00 04 05 07 ") == 0)
-	{
-		// P1 (x_axis = 1000)
-		if ( (x_axis == 1000) )
+		// P4 for JC-PS101U series where NT and P4 have the same trigger
+		// TODO: adress this complex problem if there are solutions
+		else if (wcscmp(state, L"P3") == 0)
 		{
-			if ( wcscmp(state, L"NT") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PDN;
-			else if ((wcscmp(state, L"P2") == 0))
-			{
-				inputs[*idx_inputs].ki.wVk = keymap->PUP;
-				if (isKeymapWithHoldDown)
-					*isHoldDown = TRUE;
-			}
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
 			*(state + 0) = 'P';
-			*(state + 1) = '1';
-		}
-		// P3 (x_axis = -1000)
-		else if ( (x_axis == -1000)  )
-		{
-			if ( wcscmp(state, L"P2") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PDN;
-			else if ( wcscmp(state, L"P4") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PUP;
-			*(state + 0) = 'P';
-			*(state + 1) = '3';
+			*(state + 1) = '4';
 			if (isKeymapWithHoldDown)
 				*isHoldDown = TRUE;
 		}
-		// P5 (x_axis = 24)
-		else if ( x_axis == 24 || x_axis == -8) // some JC-PS101U returns values where x_axis == -8
+		else if (wcscmp(state, L"P5") == 0)
 		{
-			if ( !isKeymapWithHoldDown && wcscmp(state, L"P4") == 0 )
-				inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			if (!isKeymapWithHoldDown)
+				inputs[*idx_inputs].ki.wVk = keymap->PUP;
 			*(state + 0) = 'P';
-			*(state + 1) = '5';
+			*(state + 1) = '4';
 		}
 	}
+	// P1
+	else if ( validateMasconState( L"P1", strText, js, triggermap ) )
+	{
+		if (wcscmp(state, L"NT") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+		else if ((wcscmp(state, L"P2") == 0))
+		{
+			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+			if (isKeymapWithHoldDown)
+				*isHoldDown = TRUE;
+		}
+		*(state + 0) = 'P';
+		*(state + 1) = '1';
+	}
+	// P2
+	else if ( validateMasconState( L"P2", strText, js, triggermap ) )
+	{
+		if (wcscmp(state, L"P1") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+		else if (wcscmp(state, L"P3") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+		*(state + 0) = 'P';
+		*(state + 1) = '2';
+		if (isKeymapWithHoldDown)
+			*isHoldDown = TRUE;
+	}
+	// P3
+	else if ( validateMasconState( L"P3", strText, js, triggermap ) )
+	{
+		if (wcscmp(state, L"P2") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+		else if (wcscmp(state, L"P4") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+		*(state + 0) = 'P';
+		*(state + 1) = '3';
+		if (isKeymapWithHoldDown)
+			*isHoldDown = TRUE;
+	}
+	// P4
+	else if ( validateMasconState( L"P4", strText, js, triggermap ) )
+	{
+		if (wcscmp(state, L"P3") == 0)
+		{
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+		    *(state + 0) = 'P';
+			*(state + 1) = '4';
+			if (isKeymapWithHoldDown)
+				*isHoldDown = TRUE;
+		}
+		else if (wcscmp(state, L"P5") == 0)
+		{
+			if (!isKeymapWithHoldDown)
+				inputs[*idx_inputs].ki.wVk = keymap->PUP;
+			*(state + 0) = 'P';
+			*(state + 1) = '4';
+		}
+	}
+	// P5
+	else if ( validateMasconState( L"P5", strText, js, triggermap ) )
+	{
+		if (!isKeymapWithHoldDown && wcscmp(state, L"P4") == 0)
+			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+		*(state + 0) = 'P';
+		*(state + 1) = '5';
+	}
+
 
 	// if the sate of mascon is changed 
 	if ( inputs[*idx_inputs].ki.wVk != keymap->NUL )
@@ -1003,10 +1061,10 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 // Name: makeButtonKeyBoardOutput()
 // Desc: Convert Joystick Button Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, BUTTONSTATE* buttonState, KEYCONFIG* keymap)
+VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap)
 {
 	// C button
-	if ( wcschr(strText, L'1') != NULL )
+	if ( validateMasconState( L"C", strText, js, triggermap ) )
 	{
 		if ( !(buttonState->C) )
 		{
@@ -1027,7 +1085,7 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 	}
 
 	// B button
-	if ( wcschr(strText, L'2') != NULL )
+	if ( validateMasconState( L"B", strText, js, triggermap ) )
 	{
 		if ( !(buttonState->B) )
 		{
@@ -1049,7 +1107,7 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 	}
 
 	// A button
-	if ( wcschr(strText, L'3') != NULL )
+	if ( validateMasconState( L"A", strText, js, triggermap ) )
 	{
 		if ( !(buttonState->A) )
 		{
@@ -1070,7 +1128,7 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 	}
 
 	// START button
-	if ( wcschr(strText, L'8') != NULL)
+	if ( validateMasconState( L"START", strText, js, triggermap ) )
 	{
 		if ( !(buttonState->START) )
 		{
@@ -1091,7 +1149,7 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 	}
 
 	// SELECT button
-	if ( wcschr(strText, L'9') != NULL )
+	if ( validateMasconState( L"SELECT", strText, js, triggermap ) )
 	{
 		if ( !(buttonState->SELECT) )
 		{
