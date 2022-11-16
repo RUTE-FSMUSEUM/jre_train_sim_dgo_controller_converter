@@ -14,7 +14,9 @@ JC-PS101 / ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラ
 
 ## リリース
 ### ダウンロード
-* [こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/tag/v0.5.1)で公開しています
+* [こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/download/v0.5.1/DgoConverter.0.5.1.zip)からダウンロードしてください
+* ダウンロードの前にREADME.mdをご一読ください
+* ダウンロード後にブラウザから警告が出ますが、"破棄"はクリックせず、＾より"継続"を選択してください
 ### 最新版の変更点
 * ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラー for Nintendo Switch に対応しました
 * [キーボード入力の発火条件（トリガマップ）](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/blob/af5893fbb713d0f9c94822b20818e0cd463da711/DgoConverter.cpp#L100)が編集可能になりました（編集の反映にはご自身で再ビルドが必要です）
