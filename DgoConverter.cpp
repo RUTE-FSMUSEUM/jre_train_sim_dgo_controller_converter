@@ -1160,103 +1160,78 @@ bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const
 {
 	if ( wcscmp( validateState, L"EB" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.EB, triggermap->AX_Y.EB, triggermap->AX_Z.EB, triggermap->BT.EB };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.EB, triggermap->AX_Y.EB, triggermap->AX_Z.EB, triggermap->POV.EB, triggermap->BT.EB };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B8" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B8, triggermap->AX_Y.B8, triggermap->AX_Z.B8, triggermap->BT.B8 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B8, triggermap->AX_Y.B8, triggermap->AX_Z.B8, triggermap->POV.B8, triggermap->BT.B8 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B7" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B7, triggermap->AX_Y.B7, triggermap->AX_Z.B7, triggermap->BT.B7 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B7, triggermap->AX_Y.B7, triggermap->AX_Z.B7, triggermap->POV.B7, triggermap->BT.B7 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B6" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B6, triggermap->AX_Y.B6, triggermap->AX_Z.B6, triggermap->BT.B6 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B6, triggermap->AX_Y.B6, triggermap->AX_Z.B6, triggermap->POV.B6, triggermap->BT.B6 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B5" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B5, triggermap->AX_Y.B5, triggermap->AX_Z.B5, triggermap->BT.B5 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B5, triggermap->AX_Y.B5, triggermap->AX_Z.B5, triggermap->POV.B5, triggermap->BT.B5 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B4" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B4, triggermap->AX_Y.B4, triggermap->AX_Z.B4, triggermap->BT.B4 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B4, triggermap->AX_Y.B4, triggermap->AX_Z.B4, triggermap->POV.B4, triggermap->BT.B4 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B3" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B3, triggermap->AX_Y.B3, triggermap->AX_Z.B3, triggermap->BT.B3 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B3, triggermap->AX_Y.B3, triggermap->AX_Z.B3, triggermap->POV.B3, triggermap->BT.B3 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B2" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B2, triggermap->AX_Y.B2, triggermap->AX_Z.B2, triggermap->BT.B2 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B2, triggermap->AX_Y.B2, triggermap->AX_Z.B2, triggermap->POV.B2, triggermap->BT.B2 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"B1" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B1, triggermap->AX_Y.B1, triggermap->AX_Z.B1, triggermap->BT.B1 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.B1, triggermap->AX_Y.B1, triggermap->AX_Z.B1, triggermap->POV.B1, triggermap->BT.B1 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"NT" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.NT, triggermap->AX_Y.NT, triggermap->AX_Z.NT, triggermap->BT.NT };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.NT, triggermap->AX_Y.NT, triggermap->AX_Z.NT, triggermap->POV.NT, triggermap->BT.NT };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"P1" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.P1, triggermap->AX_Y.P1, triggermap->AX_Z.P1, triggermap->BT.P1 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P1, triggermap->AX_Y.P1, triggermap->AX_Z.P1, triggermap->POV.P1, triggermap->BT.P1 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"P2" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.P2, triggermap->AX_Y.P2, triggermap->AX_Z.P2, triggermap->BT.P2 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P2, triggermap->AX_Y.P2, triggermap->AX_Z.P2, triggermap->POV.P2, triggermap->BT.P2 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"P3" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.P3, triggermap->AX_Y.P3, triggermap->AX_Z.P3, triggermap->BT.P3 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P3, triggermap->AX_Y.P3, triggermap->AX_Z.P3, triggermap->POV.P3, triggermap->BT.P3 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"P4" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.P4, triggermap->AX_Y.P4, triggermap->AX_Z.P4, triggermap->BT.P4 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P4, triggermap->AX_Y.P4, triggermap->AX_Z.P4, triggermap->POV.P4, triggermap->BT.P4 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
 	}
 	if ( wcscmp( validateState, L"P5" ) == 0 )
 	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.P5, triggermap->AX_Y.P5, triggermap->AX_Z.P5, triggermap->BT.P5 };
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.P5, triggermap->AX_Y.P5, triggermap->AX_Z.P5, triggermap->POV.P5, triggermap->BT.P5 };
 		return validateMasconInputs(js, buttonStrText, triggerValues);
-	}
-	if ( wcscmp( validateState, L"A" ) == 0 )
-	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.A, triggermap->AX_Y.A, triggermap->AX_Z.A, triggermap->BT.A };
-		return validateNonMasconInputs(js, buttonStrText, triggerValues);
-	}
-	if ( wcscmp( validateState, L"B" ) == 0 )
-	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.B, triggermap->AX_Y.B, triggermap->AX_Z.B, triggermap->BT.B };
-		return validateNonMasconInputs(js, buttonStrText, triggerValues);
-	}
-	if ( wcscmp( validateState, L"C" ) == 0 )
-	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.C, triggermap->AX_Y.C, triggermap->AX_Z.C, triggermap->BT.C };
-		return validateNonMasconInputs(js, buttonStrText, triggerValues);
-	}
-	if ( wcscmp( validateState, L"START" ) == 0 )
-	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.START, triggermap->AX_Y.START, triggermap->AX_Z.START, triggermap->BT.START };
-		return validateNonMasconInputs(js, buttonStrText, triggerValues);
-	}
-	if ( wcscmp( validateState, L"SELECT" ) == 0 )
-	{
-		TRIGGERVALUES triggerValues = { triggermap->AX_X.SELECT, triggermap->AX_Y.SELECT, triggermap->AX_Z.SELECT, triggermap->BT.SELECT };
-		return validateNonMasconInputs(js, buttonStrText, triggerValues);
 	}
 	return FALSE;
 }
@@ -1289,11 +1264,17 @@ bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIG
 	else if ( js.lZ == _wtol(triggerValues.AX_Z) )
 		result[2] = VALIDATED;
 
+	// Validate POV
+	if (wcscmp(triggerValues.POV, NOT_IN_USE) == 0)
+		result[3] = NOT_ASSIGNED;
+	else if (js.rgdwPOV[0] == _wtol(triggerValues.POV))
+		result[3] = VALIDATED;
+
 	// Validate BT (Buttons)
 	if ( wcscmp( triggerValues.BT, NOT_IN_USE ) == 0 )
-		result[3] = NOT_ASSIGNED;
+		result[4] = NOT_ASSIGNED;
 	else if ( wcscmp( buttonStrText, triggerValues.BT ) == 0 )
-		result[3] = VALIDATED;
+		result[4] = VALIDATED;
 
 	// Judgement
 	int NUM_NOT_ASSIGNED = 0;

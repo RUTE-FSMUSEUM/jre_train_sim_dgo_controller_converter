@@ -142,6 +142,7 @@ typedef struct KeyTriggerInfo {
 	TRIGCOND_WCHAR AX_X;
 	TRIGCOND_WCHAR AX_Y;
 	TRIGCOND_WCHAR AX_Z;
+	TRIGCOND_WCHAR POV;
 	TRIGCOND_WCHAR BT;
 	bool isExclusiveButton[NUM_BUTTONS]; // マスコンの位置がAXISではなくボタンでも表現されるJC-PS101Uのためだけに作ったconfigで、もっと良い方法はないのか模索中
 }KEYTRIGGERINFO;
@@ -150,6 +151,7 @@ typedef struct TriggerInfoForOneKey {
 	const WCHAR* AX_X;
 	const WCHAR* AX_Y;
 	const WCHAR* AX_Z;
+	const WCHAR* POV;
 	const WCHAR* BT;
 }TRIGGERVALUES;
 
