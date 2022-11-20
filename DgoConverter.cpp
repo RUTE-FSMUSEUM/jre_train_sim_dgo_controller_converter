@@ -1089,26 +1089,31 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 //-----------------------------------------------------------------------------
 VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap )
 {
-	// C button
-	if ( validateMasconState( L"C", strText, js, triggermap ) )
-	{
-		if ( !(buttonState->C) )
-		{
-			inputs[*idx_inputs].type = INPUT_KEYBOARD;
-			inputs[(*idx_inputs)++].ki.wVk = keymap->C;
-			buttonState->C = TRUE;
-		}
-	}
-	else if ( buttonState->C == TRUE )
-	{
-		inputs[*idx_inputs].type = INPUT_KEYBOARD;
-		inputs[(*idx_inputs)++].ki.wVk = keymap->C; // Press a key first, or the key will not be released.
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ESC, &(buttonState->ESC), keymap->isHoldButton.ESC, validateButtonState(L"ESC", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ENTER, &(buttonState->ENTER), keymap->isHoldButton.ENTER, validateButtonState(L"ENTER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.UP, &(buttonState->UP), keymap->isHoldButton.UP, validateButtonState(L"UP", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.DOWN, &(buttonState->DOWN), keymap->isHoldButton.DOWN, validateButtonState(L"DOWN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.LEFT, &(buttonState->LEFT), keymap->isHoldButton.LEFT, validateButtonState(L"LEFT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.RIGHT, &(buttonState->RIGHT), keymap->isHoldButton.RIGHT, validateButtonState(L"RIGHT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ELECHORN, &(buttonState->ELECHORN), keymap->isHoldButton.ELECHORN, validateButtonState(L"ELECHORN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.HORN, &(buttonState->HORN), keymap->isHoldButton.HORN, validateButtonState(L"HORN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUZZER, &(buttonState->BUZZER), keymap->isHoldButton.BUZZER, validateButtonState(L"BUZZER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.EBREST, &(buttonState->EBREST), keymap->isHoldButton.EBREST, validateButtonState(L"EBREST", strText, js, triggermap));
 
-		release[*idx_release].type = INPUT_KEYBOARD;
-		release[*idx_release].ki.wVk = keymap->C;
-		release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
-		buttonState->C = FALSE;
-	}
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.CONF, &(buttonState->ATS.CONF), keymap->isHoldButton.ATS.CONF, validateButtonState(L"ATS.CONF", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESNORM, &(buttonState->ATS.RESNORM), keymap->isHoldButton.ATS.RESNORM, validateButtonState(L"ATS.RESNORM", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESEMER, &(buttonState->ATS.RESEMER), keymap->isHoldButton.ATS.RESEMER, validateButtonState(L"ATS.RESEMER", strText, js, triggermap));
+	
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.TASC, &(buttonState->TASC), keymap->isHoldButton.TASC, validateButtonState(L"TASC", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INCHING, &(buttonState->INCHING), keymap->isHoldButton.INCHING, validateButtonState(L"INCHING", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.CRUISE, &(buttonState->CRUISE), keymap->isHoldButton.CRUISE, validateButtonState(L"CRUISE", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SUPB, &(buttonState->SUPB), keymap->isHoldButton.SUPB, validateButtonState(L"SUPB", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SLOPESTAT, &(buttonState->SLOPESTAT), keymap->isHoldButton.SLOPESTAT, validateButtonState(L"SLOPESTAT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INFO, &(buttonState->INFO), keymap->isHoldButton.INFO, validateButtonState(L"INFO", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.NEXTVIEW, &(buttonState->NEXTVIEW), keymap->isHoldButton.NEXTVIEW, validateButtonState(L"NEXTVIEW", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUP, &(buttonState->BUP), keymap->isHoldButton.BUP, validateButtonState(L"BUP", strText, js, triggermap));
+}
+
 
 //-----------------------------------------------------------------------------
 // Name: makeButtonInputArray()
