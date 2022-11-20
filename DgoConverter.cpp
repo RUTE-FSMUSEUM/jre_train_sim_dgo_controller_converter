@@ -84,12 +84,12 @@ XINPUT_DEVICE_NODE*     g_pXInputDeviceList = NULL;
 LPDIRECTINPUT8          g_pDI = NULL;
 LPDIRECTINPUTDEVICE8    g_pJoystick = NULL;
 
-const int				num_maxDeviceInfo = 10; // Maximun number of stored device info is currently set to 10
-int						idx_deviceInfo = 0;
-GAMECTRLDEVICEINFO		g_deviceInfo[num_maxDeviceInfo];
+const int               num_maxDeviceInfo = 10; // Maximun number of stored device info is currently set to 10
+int                     idx_deviceInfo = 0;
+GAMECTRLDEVICEINFO      g_deviceInfo[num_maxDeviceInfo];
 
-TCHAR					state[4] = { 'N', 'A', '\0', '\0' }; // Set current state of controller
-BUTTONSTATE				buttonState = { FALSE, FALSE, FALSE, FALSE, FALSE }; // Set current state of buttons
+TCHAR                   state[4] = { 'N', 'A', '\0', '\0' }; // Set current state of controller
+BUTTONCONFIG_BOOL       buttonState = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, { FALSE, FALSE, FALSE }, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }; // Set current state of buttons
 
 // Key mapping
 KEYINFO keyinfo[] = { 
