@@ -16,7 +16,25 @@ const int NUM_VALIDATE = 4;
 
 enum validateInputResult { NOT_VALIDATED, VALIDATED, NOT_ASSIGNED };
 
-typedef struct KeyConfig {
+typedef struct ats {
+	WORD CONF;
+	WORD RESNORM;
+	WORD RESEMER;
+}ATSINFO;
+
+typedef struct AtsBool {
+	bool CONF;
+	bool RESNORM;
+	bool RESEMER;
+}ATSBOOL;
+
+typedef struct AtsWchar {
+	WCHAR CONF[NAME_SIZE];
+	WCHAR RESNORM[NAME_SIZE];
+	WCHAR RESEMER[NAME_SIZE];
+}ATSWCHAR;
+
+typedef struct MasconConfig {
 	WORD EB;
 	WORD BNT;
 	WORD PNT;
@@ -24,12 +42,57 @@ typedef struct KeyConfig {
 	WORD PUP;
 	WORD BDN;
 	WORD PDN;
+}MASCONCONFIG;
+
+typedef struct ButtonConfig {
+	WORD ESC;
+	WORD ENTER;
+	WORD UP;
+	WORD DOWN;
+	WORD LEFT;
+	WORD RIGHT;
+	WORD ELECHORN;
+	WORD HORN;
+	WORD BUZZER;
+	WORD EBREST;
+	ATSINFO ATS;
+	WORD TASC;
+	WORD INCHING;
+	WORD CRUISE;
+	WORD SUPB;
+	WORD SLOPESTAT;
+	WORD INFO;
+	WORD NEXTVIEW;
+	WORD BUP;
+}BUTTONCONFIG;
+
+typedef struct ButtonBoolConfig {
+	bool ESC;
+	bool ENTER;
+	bool UP;
+	bool DOWN;
+	bool LEFT;
+	bool RIGHT;
+	bool ELECHORN;
+	bool HORN;
+	bool BUZZER;
+	bool EBREST;
+	ATSBOOL ATS;
+	bool TASC;
+	bool INCHING;
+	bool CRUISE;
+	bool SUPB;
+	bool SLOPESTAT;
+	bool INFO;
+	bool NEXTVIEW;
+	bool BUP;
+}BUTTONCONFIG_BOOL;
+
+typedef struct KeyConfig {
 	WORD NUL;
-	WORD A;
-	WORD B;
-	WORD C;
-	WORD START;
-	WORD SELECT;
+	MASCONCONFIG MASCON;
+	BUTTONCONFIG BTN;
+	BUTTONCONFIG_BOOL isHoldButton;
 }KEYCONFIG;
 
 typedef struct KeyInfo {
@@ -53,11 +116,25 @@ typedef struct WcharTriggerCondition {
 	WCHAR P3[NAME_SIZE];
 	WCHAR P4[NAME_SIZE];
 	WCHAR P5[NAME_SIZE];
-	WCHAR A[NAME_SIZE];
-	WCHAR B[NAME_SIZE];
-	WCHAR C[NAME_SIZE];
-	WCHAR START[NAME_SIZE];
-	WCHAR SELECT[NAME_SIZE];
+	WCHAR ESC[NAME_SIZE];
+	WCHAR ENTER[NAME_SIZE];
+	WCHAR UP[NAME_SIZE];
+	WCHAR DOWN[NAME_SIZE];
+	WCHAR LEFT[NAME_SIZE];
+	WCHAR RIGHT[NAME_SIZE];
+	WCHAR ELECHORN[NAME_SIZE];
+	WCHAR HORN[NAME_SIZE];
+	WCHAR BUZZER[NAME_SIZE];
+	WCHAR EBREST[NAME_SIZE];
+	ATSWCHAR ATS;
+	WCHAR TASC[NAME_SIZE];
+	WCHAR INCHING[NAME_SIZE];
+	WCHAR CRUISE[NAME_SIZE];
+	WCHAR SUPB[NAME_SIZE];
+	WCHAR SLOPESTAT[NAME_SIZE];
+	WCHAR INFO[NAME_SIZE];
+	WCHAR NEXTVIEW[NAME_SIZE];
+	WCHAR BUP[NAME_SIZE];
 }TRIGCOND_WCHAR;
 
 typedef struct KeyTriggerInfo {
@@ -75,14 +152,6 @@ typedef struct TriggerInfoForOneKey {
 	const WCHAR* AX_Z;
 	const WCHAR* BT;
 }TRIGGERVALUES;
-
-typedef struct ButtonState {
-	bool A;
-	bool B;
-	bool C;
-	bool START;
-	bool SELECT;
-}BUTTONSTATE;
 
 typedef struct GameControllerDeviceInfo {
 	WCHAR productName[260];

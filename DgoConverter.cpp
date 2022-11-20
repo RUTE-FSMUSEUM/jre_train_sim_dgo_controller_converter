@@ -93,40 +93,61 @@ BUTTONSTATE				buttonState = { FALSE, FALSE, FALSE, FALSE, FALSE }; // Set curre
 
 // Key mapping
 KEYINFO keyinfo[] = { 
-	{ L"JRE SIM ONE HANDLE", { 0x31, 0x53, 0x53, 0x51, 0x51, 0x5a, 0x5a, NULL, 0x00, VK_BACK, VK_RETURN, 0x00, 0x00 }},
-	{ L"JRE SIM TWO HANDLE", { VK_OEM_2, 0x4d, 0x53, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a, NULL, 0x00, VK_BACK, VK_RETURN, 0x00, 0x00 }},
-	{ L"HMMSIM METRO", { VK_OEM_PERIOD, VK_OEM_COMMA, 0x41, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a, NULL, 0x41, 0x00, VK_RETURN, 0x00, VK_SPACE }},
+	{ L"JRE SIM ONE HANDLE", 
+	  { NULL,
+	    { 0x31, 0x53, 0x53, 0x51, 0x51, 0x5a, 0x5a },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
+		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
+	  }
+	},
+	{ L"JRE SIM TWO HANDLE",
+	  { NULL,
+		{ VK_OEM_2, 0x4d, 0x53, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
+		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
+	  }
+	},
+	{ L"HMMSIM METRO",
+	  { NULL,
+		{ VK_OEM_PERIOD, VK_OEM_COMMA, 0x41, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, NULL, VK_BACK, NULL, NULL, { NULL, NULL, NULL }, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0x41 },
+		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
+	  }
+	}
 };
 const int keyinfo_len = sizeof(keyinfo) / sizeof(KEYINFO);
 // Key trigger conditions
 KEYTRIGGERINFO triggermap[] = {
 	{ L"JC-PS101U", 
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"24", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"3", L"2", L"1", L"8", L"9" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"24", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
       { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
 	},
-	{ L"JC-PS101U - late",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"-8", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"3", L"2", L"1", L"8", L"9" },
+	{ L"JC-PS101U - X Axis = -8 at P5",
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"-8", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
 	  { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
 	},
 	{ L"ZUIKI One Handle Mascon",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"1", L"2", L"9", L"8" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"18000", L"27000", L"9000", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"N/A", L"N/A", L"N/A", L"N/A", L"3", L"2", L"7", L"0", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"9", L"8", L"4", L"N/A", L"N/A", L"2" },
 	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE }
-	}
-	/*
-	{ L"DEBUG",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	},
+	/*{ L"DEBUG",
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
 	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }
 	}
 	*/
@@ -855,14 +876,14 @@ VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const
 // Name: makeMasconKeyBoardOutput()
 // Desc: Convert Joystick Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
+VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown )
 {
 	const long x_axis = js.lX;
 	// EB
 	if ( validateMasconState( L"EB", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"EB") != 0)
-			inputs[*idx_inputs].ki.wVk = keymap->EB;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.EB;
 		*(state + 0) = 'E';
 		*(state + 1) = 'B';
 	}
@@ -870,9 +891,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B8", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"EB") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B7") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '8';
 	}
@@ -880,9 +901,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B7", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B8") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B6") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '7';
 	}
@@ -890,9 +911,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B6", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B7") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B5") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '6';
 	}
@@ -900,9 +921,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B5", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B6") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B4") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '5';
 	}
@@ -910,9 +931,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B4", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B5") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B3") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '4';
 	}
@@ -920,9 +941,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B3", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B4") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B2") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '3';
 	}
@@ -930,9 +951,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B2", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B3") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"B1") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '2';
 	}
@@ -940,9 +961,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"B1", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"B2") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BDN;
 		else if (wcscmp(state, L"NT") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->BUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BUP;
 		*(state + 0) = 'B';
 		*(state + 1) = '1';
 	}
@@ -952,13 +973,13 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		// NT
 		if (wcscmp(state, L"B1") == 0)
 		{
-			inputs[*idx_inputs].ki.wVk = keymap->BNT;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.BNT;
 			*(state + 0) = 'N';
 			*(state + 1) = 'T';
 		}
 		else if (wcscmp(state, L"P1") == 0)
 		{
-			inputs[*idx_inputs].ki.wVk = keymap->PNT;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PNT;
 			*(state + 0) = 'N';
 			*(state + 1) = 'T';
 			if (isKeymapWithHoldDown)
@@ -968,7 +989,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		// TODO: adress this complex problem if there are solutions
 		else if (wcscmp(state, L"P3") == 0)
 		{
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 			*(state + 0) = 'P';
 			*(state + 1) = '4';
 			if (isKeymapWithHoldDown)
@@ -977,7 +998,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		else if (wcscmp(state, L"P5") == 0)
 		{
 			if (!isKeymapWithHoldDown)
-				inputs[*idx_inputs].ki.wVk = keymap->PUP;
+				inputs[*idx_inputs].ki.wVk = keymap->MASCON.PUP;
 			*(state + 0) = 'P';
 			*(state + 1) = '4';
 		}
@@ -986,10 +1007,10 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"P1", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"NT") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 		else if ((wcscmp(state, L"P2") == 0))
 		{
-			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PUP;
 			if (isKeymapWithHoldDown)
 				*isHoldDown = TRUE;
 		}
@@ -1000,9 +1021,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"P2", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"P1") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 		else if (wcscmp(state, L"P3") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PUP;
 		*(state + 0) = 'P';
 		*(state + 1) = '2';
 		if (isKeymapWithHoldDown)
@@ -1012,9 +1033,9 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"P3", strText, js, triggermap ) )
 	{
 		if (wcscmp(state, L"P2") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 		else if (wcscmp(state, L"P4") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PUP;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PUP;
 		*(state + 0) = 'P';
 		*(state + 1) = '3';
 		if (isKeymapWithHoldDown)
@@ -1025,7 +1046,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	{
 		if (wcscmp(state, L"P3") == 0)
 		{
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 		    *(state + 0) = 'P';
 			*(state + 1) = '4';
 			if (isKeymapWithHoldDown)
@@ -1034,7 +1055,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		else if (wcscmp(state, L"P5") == 0)
 		{
 			if (!isKeymapWithHoldDown)
-				inputs[*idx_inputs].ki.wVk = keymap->PUP;
+				inputs[*idx_inputs].ki.wVk = keymap->MASCON.PUP;
 			*(state + 0) = 'P';
 			*(state + 1) = '4';
 		}
@@ -1043,7 +1064,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	else if ( validateMasconState( L"P5", strText, js, triggermap ) )
 	{
 		if (!isKeymapWithHoldDown && wcscmp(state, L"P4") == 0)
-			inputs[*idx_inputs].ki.wVk = keymap->PDN;
+			inputs[*idx_inputs].ki.wVk = keymap->MASCON.PDN;
 		*(state + 0) = 'P';
 		*(state + 1) = '5';
 	}
