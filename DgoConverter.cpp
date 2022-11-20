@@ -1162,7 +1162,7 @@ VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* 
 // Name: validateMasconState()
 // Desc: Validate Mascon Inputs based on a trigger map.
 //-----------------------------------------------------------------------------
-bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap)
+bool validateMasconState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap )
 {
 	if ( wcscmp( validateState, L"EB" ) == 0 )
 	{
@@ -1247,7 +1247,7 @@ bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const
 // Name: validateMasconInputs()
 // Desc: Validate Input (AX_X, AX_Y, AX_Z, Buttons etc.) for Mascon.
 //-----------------------------------------------------------------------------
-bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
+bool validateMasconInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues )
 {
 	validateInputResult result[NUM_VALIDATE] = { NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED }; // { AX_X, AX_Y, AX_Z, BT }
 
@@ -1301,7 +1301,7 @@ bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIG
 // Name: validateButtonState()
 // Desc: Validate Joystick Button Inputs based on a trigger map.
 //-----------------------------------------------------------------------------
-bool validateButtonState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap)
+bool validateButtonState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap )
 {
 	if (wcscmp(validateState, L"ESC") == 0)
 	{
@@ -1418,7 +1418,7 @@ bool validateButtonState(WCHAR* validateState, const TCHAR* buttonStrText, const
 // Name: validateButtonInputs()
 // Desc: Validate Input (AX_X, AX_Y, AX_Z, Buttons etc.) for buttons.
 //-----------------------------------------------------------------------------
-bool validateButtonInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
+bool validateButtonInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues )
 {
 	validateInputResult result[NUM_VALIDATE] = { NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED }; // { AX_X, AX_Y, AX_Z, BT }
 
