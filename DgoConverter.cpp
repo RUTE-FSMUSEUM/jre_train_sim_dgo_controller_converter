@@ -842,7 +842,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonStat
 VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown )
 {
 	// KeyBoard Output Struct
-	const int num_inputs = 6;
+	const int num_inputs = 16;
 	INPUT inputs[num_inputs] = {};
 	INPUT release[num_inputs] = {};
 	ZeroMemory(inputs, sizeof(inputs));

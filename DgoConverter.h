@@ -12,7 +12,7 @@
 const int NAME_SIZE = 128;
 const int NUM_BUTTONS = 10;
 const WCHAR* NOT_IN_USE = L"N/A";
-const int NUM_VALIDATE = 4;
+const int NUM_VALIDATE = 5;
 
 enum validateInputResult { NOT_VALIDATED, VALIDATED, NOT_ASSIGNED };
 
