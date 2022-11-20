@@ -45,6 +45,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonStat
 VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
 VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
 VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap );
+VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, bool* thisButtonState, bool isHoldButton, bool isValidThisButton );
 bool validateMasconState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
 bool validateMasconInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues );
 
@@ -1086,91 +1087,45 @@ VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 		buttonState->C = FALSE;
 	}
 
-	// B button
-	if ( validateMasconState( L"B", strText, js, triggermap ) )
-	{
-		if ( !(buttonState->B) )
+//-----------------------------------------------------------------------------
+// Name: makeButtonInputArray()
+// Desc: Make input array for buttons.
+//-----------------------------------------------------------------------------
+VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, bool* thisButtonState, bool isHoldButton, bool isValidThisButton ) {
+	if ( isHoldButton ) {
+		if ( isValidThisButton )
 		{
-			inputs[*idx_inputs].type = INPUT_KEYBOARD;
-			inputs[(*idx_inputs)++].ki.wVk = keymap->B;
-			buttonState->B = TRUE;
+			if ( !(*thisButtonState) )
+			{
+				inputs[*idx_inputs].type = INPUT_KEYBOARD;
+				inputs[(*idx_inputs)++].ki.wVk = wVk;
+				*thisButtonState = TRUE;
+			}
 		}
-		
-	}
-	else if ( buttonState->B == TRUE )
-	{
-		inputs[*idx_inputs].type = INPUT_KEYBOARD;
-		inputs[(*idx_inputs)++].ki.wVk = keymap->B; // Press a key first, or the key will not be released.
-
-		release[*idx_release].type = INPUT_KEYBOARD;
-		release[*idx_release].ki.wVk = keymap->B;
-		release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
-		buttonState->B = FALSE;
-	}
-
-	// A button
-	if ( validateMasconState( L"A", strText, js, triggermap ) )
-	{
-		if ( !(buttonState->A) )
+		else if ( (*thisButtonState) == TRUE )
 		{
-			inputs[*idx_inputs].type = INPUT_KEYBOARD;
-			inputs[(*idx_inputs)++].ki.wVk = keymap->A;
-			buttonState->A = TRUE;
+			//inputs[*idx_inputs].type = INPUT_KEYBOARD;
+			inputs[(*idx_inputs)++].ki.wVk = wVk; // Press a key first, or the key will not be released.
+
+			release[*idx_release].type = INPUT_KEYBOARD;
+			release[*idx_release].ki.wVk = wVk;
+			release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
+			*thisButtonState = FALSE;
 		}
 	}
-	else if ( buttonState->A == TRUE )
-	{
-		inputs[*idx_inputs].type = INPUT_KEYBOARD;
-		inputs[(*idx_inputs)++].ki.wVk = keymap->A; // Press a key first, or the key will not be released.
-
-		release[*idx_release].type = INPUT_KEYBOARD;
-		release[*idx_release].ki.wVk = keymap->A;
-		release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
-		buttonState->A = FALSE;
-	}
-
-	// START button
-	if ( validateMasconState( L"START", strText, js, triggermap ) )
-	{
-		if ( !(buttonState->START) )
+	else {
+		// isHoldButton == FALSE will be deprecated.
+		if ( isValidThisButton )
 		{
 			inputs[*idx_inputs].type = INPUT_KEYBOARD;
-			inputs[(*idx_inputs)++].ki.wVk = keymap->START;
-			buttonState->START = TRUE;
+			inputs[*idx_inputs].ki.wVk = wVk;
+
+			release[*idx_release].ki.wVk = inputs[(*idx_inputs)++].ki.wVk;
+			release[*idx_release].type = INPUT_KEYBOARD;
+			release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP; // *idx++ cause a bug (*idx++ regards as *(idx++), not (*idx)++), so use (*idx)++
+			*thisButtonState = FALSE;
 		}
 	}
-	else if ( buttonState->START == TRUE )
-	{
-		inputs[*idx_inputs].type = INPUT_KEYBOARD;
-		inputs[(*idx_inputs)++].ki.wVk = keymap->START; // Press a key first, or the key will not be released.
-
-		release[*idx_release].type = INPUT_KEYBOARD;
-		release[*idx_release].ki.wVk = keymap->START;
-		release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
-		buttonState->START = FALSE;
-	}
-
-	// SELECT button
-	if ( validateMasconState( L"SELECT", strText, js, triggermap ) )
-	{
-		if ( !(buttonState->SELECT) )
-		{
-			inputs[*idx_inputs].type = INPUT_KEYBOARD;
-			inputs[(*idx_inputs)++].ki.wVk = keymap->SELECT;
-			buttonState->SELECT = TRUE;
-		}
-	}
-	else if ( buttonState->SELECT == TRUE )
-	{
-		inputs[*idx_inputs].type = INPUT_KEYBOARD;
-		inputs[(*idx_inputs)++].ki.wVk = keymap->SELECT; // Press a key first, or the key will not be released.
-
-		release[*idx_release].type = INPUT_KEYBOARD;
-		release[*idx_release].ki.wVk = keymap->SELECT;
-		release[(*idx_release)++].ki.dwFlags = KEYEVENTF_KEYUP;
-		buttonState->SELECT = FALSE;
-	}
-
 }
 
 
