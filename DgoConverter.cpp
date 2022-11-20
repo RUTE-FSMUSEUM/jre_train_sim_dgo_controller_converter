@@ -44,8 +44,8 @@ HRESULT SwitchJoystick( HWND hDlg, GUID guidInstance );
 HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown );
 VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
 VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
-VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap );
-VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, bool* thisButtonState, bool isHoldButton, bool isValidThisButton );
+VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, WORD null, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap );
+VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, WORD null, bool* thisButtonState, bool isHoldButton, bool isValidThisButton );
 bool validateMasconState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
 bool validateButtonState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
 bool validateMasconInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues );
@@ -860,7 +860,7 @@ VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const
 	DWORD holdDownTime = 70;
 
 	makeMasconKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, &isHoldDown, masconText, js, state, triggermap, keymap, isKeymapWithHoldDown );
-	makeButtonKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, buttonText, js, buttonState, triggermap, keymap );
+	makeButtonKeyBoardOutput( inputs, release, &idx_inputs, &idx_release, buttonText, keymap->NUL, js, buttonState, triggermap, keymap );
 
 	if (inputs[0].ki.wVk != keymap->NUL)
 	{
@@ -1087,31 +1087,31 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 // Name: makeButtonKeyBoardOutput()
 // Desc: Convert Joystick Button Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap )
+VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, WORD null, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap )
 {
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ESC, &(buttonState->ESC), keymap->isHoldButton.ESC, validateButtonState(L"ESC", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ENTER, &(buttonState->ENTER), keymap->isHoldButton.ENTER, validateButtonState(L"ENTER", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.UP, &(buttonState->UP), keymap->isHoldButton.UP, validateButtonState(L"UP", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.DOWN, &(buttonState->DOWN), keymap->isHoldButton.DOWN, validateButtonState(L"DOWN", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.LEFT, &(buttonState->LEFT), keymap->isHoldButton.LEFT, validateButtonState(L"LEFT", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.RIGHT, &(buttonState->RIGHT), keymap->isHoldButton.RIGHT, validateButtonState(L"RIGHT", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ELECHORN, &(buttonState->ELECHORN), keymap->isHoldButton.ELECHORN, validateButtonState(L"ELECHORN", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.HORN, &(buttonState->HORN), keymap->isHoldButton.HORN, validateButtonState(L"HORN", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUZZER, &(buttonState->BUZZER), keymap->isHoldButton.BUZZER, validateButtonState(L"BUZZER", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.EBREST, &(buttonState->EBREST), keymap->isHoldButton.EBREST, validateButtonState(L"EBREST", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ESC, null, &(buttonState->ESC), keymap->isHoldButton.ESC, validateButtonState(L"ESC", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ENTER, null, &(buttonState->ENTER), keymap->isHoldButton.ENTER, validateButtonState(L"ENTER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.UP, null, &(buttonState->UP), keymap->isHoldButton.UP, validateButtonState(L"UP", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.DOWN, null, &(buttonState->DOWN), keymap->isHoldButton.DOWN, validateButtonState(L"DOWN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.LEFT, null, &(buttonState->LEFT), keymap->isHoldButton.LEFT, validateButtonState(L"LEFT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.RIGHT, null, &(buttonState->RIGHT), keymap->isHoldButton.RIGHT, validateButtonState(L"RIGHT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ELECHORN, null, &(buttonState->ELECHORN), keymap->isHoldButton.ELECHORN, validateButtonState(L"ELECHORN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.HORN, null, &(buttonState->HORN), keymap->isHoldButton.HORN, validateButtonState(L"HORN", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUZZER, null, &(buttonState->BUZZER), keymap->isHoldButton.BUZZER, validateButtonState(L"BUZZER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.EBREST, null, &(buttonState->EBREST), keymap->isHoldButton.EBREST, validateButtonState(L"EBREST", strText, js, triggermap));
 
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.CONF, &(buttonState->ATS.CONF), keymap->isHoldButton.ATS.CONF, validateButtonState(L"ATS.CONF", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESNORM, &(buttonState->ATS.RESNORM), keymap->isHoldButton.ATS.RESNORM, validateButtonState(L"ATS.RESNORM", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESEMER, &(buttonState->ATS.RESEMER), keymap->isHoldButton.ATS.RESEMER, validateButtonState(L"ATS.RESEMER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.CONF, null, &(buttonState->ATS.CONF), keymap->isHoldButton.ATS.CONF, validateButtonState(L"ATS.CONF", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESNORM, null, &(buttonState->ATS.RESNORM), keymap->isHoldButton.ATS.RESNORM, validateButtonState(L"ATS.RESNORM", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESEMER, null, &(buttonState->ATS.RESEMER), keymap->isHoldButton.ATS.RESEMER, validateButtonState(L"ATS.RESEMER", strText, js, triggermap));
 	
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.TASC, &(buttonState->TASC), keymap->isHoldButton.TASC, validateButtonState(L"TASC", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INCHING, &(buttonState->INCHING), keymap->isHoldButton.INCHING, validateButtonState(L"INCHING", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.CRUISE, &(buttonState->CRUISE), keymap->isHoldButton.CRUISE, validateButtonState(L"CRUISE", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SUPB, &(buttonState->SUPB), keymap->isHoldButton.SUPB, validateButtonState(L"SUPB", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SLOPESTAT, &(buttonState->SLOPESTAT), keymap->isHoldButton.SLOPESTAT, validateButtonState(L"SLOPESTAT", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INFO, &(buttonState->INFO), keymap->isHoldButton.INFO, validateButtonState(L"INFO", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.NEXTVIEW, &(buttonState->NEXTVIEW), keymap->isHoldButton.NEXTVIEW, validateButtonState(L"NEXTVIEW", strText, js, triggermap));
-	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUP, &(buttonState->BUP), keymap->isHoldButton.BUP, validateButtonState(L"BUP", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.TASC, null, &(buttonState->TASC), keymap->isHoldButton.TASC, validateButtonState(L"TASC", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INCHING, null, &(buttonState->INCHING), keymap->isHoldButton.INCHING, validateButtonState(L"INCHING", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.CRUISE, null, &(buttonState->CRUISE), keymap->isHoldButton.CRUISE, validateButtonState(L"CRUISE", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SUPB, null, &(buttonState->SUPB), keymap->isHoldButton.SUPB, validateButtonState(L"SUPB", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.SLOPESTAT, null, &(buttonState->SLOPESTAT), keymap->isHoldButton.SLOPESTAT, validateButtonState(L"SLOPESTAT", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INFO, null, &(buttonState->INFO), keymap->isHoldButton.INFO, validateButtonState(L"INFO", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.NEXTVIEW, null, &(buttonState->NEXTVIEW), keymap->isHoldButton.NEXTVIEW, validateButtonState(L"NEXTVIEW", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.BUP, null, &(buttonState->BUP), keymap->isHoldButton.BUP, validateButtonState(L"BUP", strText, js, triggermap));
 }
 
 
@@ -1119,8 +1119,9 @@ VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 // Name: makeButtonInputArray()
 // Desc: Make input array for buttons.
 //-----------------------------------------------------------------------------
-VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, bool* thisButtonState, bool isHoldButton, bool isValidThisButton ) {
-	if ( isHoldButton ) {
+VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, WORD wVk, WORD null, bool* thisButtonState, bool isHoldButton, bool isValidThisButton ) 
+{
+	if ( isHoldButton && wVk != null ) {
 		if ( isValidThisButton )
 		{
 			if ( !(*thisButtonState) )
@@ -1141,7 +1142,7 @@ VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* 
 			*thisButtonState = FALSE;
 		}
 	}
-	else {
+	else if ( wVk != null ) {
 		// isHoldButton == FALSE will be deprecated.
 		if ( isValidThisButton )
 		{
