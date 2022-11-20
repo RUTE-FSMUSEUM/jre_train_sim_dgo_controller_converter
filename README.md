@@ -1,5 +1,5 @@
 # JR EAST Train Simulator | JR東日本トレインシミュレータ - コントローラ 入力変換ソフトウェア
-最新版：**v0.6.1** </br></br>
+最新版：**v0.6.2** </br></br>
 JC-PS101 / ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラ などのデバイスからの信号を変換し、特定のキー入力を行うソフトウェア、DgoConverter のリポジトリです</br>
 <img width="256" src="https://user-images.githubusercontent.com/63990380/202198049-5252c8f0-ef44-4b92-89e3-567e429ac5d9.png"></img></br>
 **▲ GUI例**</br>
@@ -15,7 +15,7 @@ JC-PS101 / ZUIKI 電車でＧＯ！！専用ワンハンドルコントローラ
 
 ## リリース
 ### ダウンロード
-* [こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/download/v0.6.1/DgoConverter.0.6.1.zip)からダウンロードしてください
+* [こちら](https://github.com/RUTE-FSMUSEUM/jre_train_sim_dgo_controller_converter/releases/download/v0.6.2/DgoConverter.0.6.2.zip)からダウンロードしてください
 * ダウンロードの前にREADME.mdをご一読ください
 * ダウンロード後にブラウザから警告が出た場合、"破棄"はクリックせず、＾より"継続"を選択してください
 * アンチウイルスソフトから警告された場合は、このソフトを「許可」するよう設定をお願いします
