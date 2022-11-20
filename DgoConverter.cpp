@@ -40,14 +40,13 @@ BOOL CALLBACK    EnumObjectsCallback( const DIDEVICEOBJECTINSTANCE* pdidoi, VOID
 BOOL CALLBACK    EnumJoysticksCallback( const DIDEVICEINSTANCE* pdidInstance, VOID* pContext );
 HRESULT InitDirectInput( HWND hDlg );
 VOID FreeDirectInput();
-HRESULT SwitchJoystick(HWND hDlg, GUID guidInstance);
-HRESULT UpdateInputState(HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown);
-VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
-VOID makeMasconKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown);
-VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap);
-bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap);
-bool validateMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues);
-bool validateNonMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues);
+HRESULT SwitchJoystick( HWND hDlg, GUID guidInstance );
+HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown );
+VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
+VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, bool* isHoldDown, const TCHAR* strText, const DIJOYSTATE2 js, TCHAR* state, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown );
+VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap );
+bool validateMasconState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
+bool validateMasconInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues );
 
 // Stuff to filter out XInput devices
 #include <wbemidl.h>
@@ -712,7 +711,7 @@ HRESULT SwitchJoystick( HWND hDlg, GUID guidInstance )
 // Name: UpdateInputState()
 // Desc: Get the input device's state and display it.
 //-----------------------------------------------------------------------------
-HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown)
+HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYCONFIG* keymap, KEYTRIGGERINFO* triggermap, const bool isKeymapWithHoldDown )
 {
     HRESULT hr;
     TCHAR strText[512] = {0}; // Device state text
@@ -816,7 +815,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONSTATE* buttonState, KEY
 // Name: makeKeyBoardOutput()
 // Desc: Convert Joystick/Button Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeKeyBoardOutput(const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown)
+VOID makeKeyBoardOutput( const TCHAR* masconText, const TCHAR* buttonText, const DIJOYSTATE2 js, TCHAR* state, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap, const bool isKeymapWithHoldDown )
 {
 	// KeyBoard Output Struct
 	const int num_inputs = 6;
@@ -1064,7 +1063,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 // Name: makeButtonKeyBoardOutput()
 // Desc: Convert Joystick Button Inputs to Key board outputs.
 //-----------------------------------------------------------------------------
-VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONSTATE* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap)
+VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, int* idx_release, const TCHAR* strText, const DIJOYSTATE2 js, BUTTONCONFIG_BOOL* buttonState, KEYTRIGGERINFO* triggermap, KEYCONFIG* keymap )
 {
 	// C button
 	if ( validateMasconState( L"C", strText, js, triggermap ) )
@@ -1177,7 +1176,7 @@ VOID makeButtonKeyBoardOutput(INPUT* inputs, INPUT* release, int* idx_inputs, in
 
 //-----------------------------------------------------------------------------
 // Name: validateMasconState()
-// Desc: Validate Joystick Button Inputs based on a trigger map.
+// Desc: Validate Mascon Inputs based on a trigger map.
 //-----------------------------------------------------------------------------
 bool validateMasconState(WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap)
 {
