@@ -139,7 +139,7 @@ KEYTRIGGERINFO triggermap[] = {
 	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
 	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
 	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"18000", L"27000", L"9000", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"N/A", L"N/A", L"N/A", L"N/A", L"3", L"2", L"7", L"0", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"9", L"8", L"4", L"N/A", L"N/A", L"2" },
+	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"N/A", L"N/A", L"N/A", L"N/A", L"3", L"2", L"7", L"0", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"9", L"8", L"4", L"N/A", L"N/A", L"8" },
 	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE }
 	},
 	/*{ L"DEBUG",
