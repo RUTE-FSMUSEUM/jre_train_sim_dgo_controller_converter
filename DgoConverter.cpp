@@ -801,7 +801,7 @@ HRESULT UpdateInputState( HWND hDlg, TCHAR* state, BUTTONCONFIG_BOOL* buttonStat
 			else
 			{
 				TCHAR sz_b[128];
-				StringCchPrintf(sz_b, 128, TEXT("%02d "), i);
+				StringCchPrintf(sz_b, 128, TEXT("%2d "), i); // もし11以上のボタンを認めるなら、11と1の区別が必要（ボタンの判定は、「その数が含まれているか」どうかなので、1と11の区別がつかない）
 				StringCchCat(buttonText, 512, sz_b);
 			}
         }
