@@ -89,28 +89,28 @@ int                     idx_deviceInfo = 0;
 GAMECTRLDEVICEINFO      g_deviceInfo[num_maxDeviceInfo];
 
 TCHAR                   state[4] = { 'N', 'A', '\0', '\0' }; // Set current state of controller
-BUTTONCONFIG_BOOL       buttonState = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, { FALSE, FALSE, FALSE }, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }; // Set current state of buttons
+BUTTONCONFIG_BOOL       buttonState = { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, { FALSE, FALSE, FALSE, FALSE }, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }; // Set current state of buttons
 
 // Key mapping
 KEYINFO keyinfo[] = { 
 	{ L"JRE SIM ONE HANDLE", 
 	  { NULL,
 	    { 0x31, 0x53, 0x53, 0x51, 0x51, 0x5a, 0x5a },
-		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55, 0x58 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
 		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
 	  }
 	},
 	{ L"JRE SIM TWO HANDLE",
 	  { NULL,
 		{ VK_OEM_2, 0x4d, 0x53, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a },
-		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, VK_RETURN, VK_BACK, 0x42, 0x45, { VK_SPACE, 0x59, 0x55, 0x58 }, 0x54, 0x49, 0x57, 0x44, 0x4B, 0x56, 0x43, NULL },
 		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
 	  }
 	},
 	{ L"HMMSIM METRO",
 	  { NULL,
 		{ VK_OEM_PERIOD, VK_OEM_COMMA, 0x41, VK_OEM_PERIOD, 0x41, VK_OEM_COMMA, 0x5a },
-		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, NULL, VK_BACK, NULL, NULL, { NULL, NULL, NULL }, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0x41 },
+		{ VK_ESCAPE, VK_RETURN, VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, NULL, VK_BACK, NULL, NULL, { VK_SPACE, NULL, NULL, NULL }, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0x41 },
 		{ TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, { TRUE, TRUE, TRUE }, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE },
 	  }
 	}
@@ -119,35 +119,35 @@ const int keyinfo_len = sizeof(keyinfo) / sizeof(KEYINFO);
 // Key trigger conditions
 KEYTRIGGERINFO triggermap[] = {
 	{ L"JC-PS101U", 
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"24", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"24", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
       { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
 	},
 	{ L"JC-PS101U - X Axis = -8 at P5",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"-8", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"-1000", L"1000", L"1000", L"-1000", L"-1000", L"-8", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"", L"04 07 ", L"04 06 07 ", L"05 ", L"05 06 ", L"04 05 ", L"04 05 06 ", L"05 07 ", L"05 06 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"04 05 07 ", L"00 04 05 07 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"2", L"9", { L"8", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1" },
 	  { TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE }
 	},
 	{ L"ZUIKI One Handle Mascon",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"18000", L"27000", L"9000", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"N/A", L"N/A", L"N/A", L"N/A", L"3", L"2", L"7", L"0", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"9", L"8", L"4", L"N/A", L"N/A", L"8" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"-1000", L"-961", L"-852", L"-750", L"-641", L"-531", L"-430", L"-320", L"-211", L"0", L"239", L"429", L"612", L"802", L"1000", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"0", L"18000", L"27000", L"9000", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"06 ", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"1", L"3", L"N/A", L"N/A", L"N/A", L"N/A", L"3", L"2", L"7", L"0", { L"5", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"9", L"8", L"4", L"N/A", L"N/A", L"8" },
 	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE }
 	},
 	/*{ L"DEBUG",
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
-	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", { L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
+	  { L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" { L"N/A", L"N/A", L"N/A", L"N/A" }, L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A", L"N/A" },
 	  { FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE }
 	}
 	*/
@@ -1103,6 +1103,7 @@ VOID makeButtonKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.CONF, null, &(buttonState->ATS.CONF), keymap->isHoldButton.ATS.CONF, validateButtonState(L"ATS.CONF", strText, js, triggermap));
 	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESNORM, null, &(buttonState->ATS.RESNORM), keymap->isHoldButton.ATS.RESNORM, validateButtonState(L"ATS.RESNORM", strText, js, triggermap));
 	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.RESEMER, null, &(buttonState->ATS.RESEMER), keymap->isHoldButton.ATS.RESEMER, validateButtonState(L"ATS.RESEMER", strText, js, triggermap));
+	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.ATS.WARNCNT, null, &(buttonState->ATS.WARNCNT), keymap->isHoldButton.ATS.WARNCNT, validateButtonState(L"ATS.WARNCNT", strText, js, triggermap));
 	
 	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.TASC, null, &(buttonState->TASC), keymap->isHoldButton.TASC, validateButtonState(L"TASC", strText, js, triggermap));
 	makeButtonInputArray(inputs, release, idx_inputs, idx_release, keymap->BTN.INCHING, null, &(buttonState->INCHING), keymap->isHoldButton.INCHING, validateButtonState(L"INCHING", strText, js, triggermap));
@@ -1367,6 +1368,11 @@ bool validateButtonState( WCHAR* validateState, const TCHAR* buttonStrText, cons
 	if (wcscmp(validateState, L"ATS.RESEMER") == 0)
 	{
 		TRIGGERVALUES triggerValues = { triggermap->AX_X.ATS.RESEMER, triggermap->AX_Y.ATS.RESEMER, triggermap->AX_Z.ATS.RESEMER, triggermap->POV.ATS.RESEMER, triggermap->BT.ATS.RESEMER };
+		return validateButtonInputs(js, buttonStrText, triggerValues);
+	}
+	if (wcscmp(validateState, L"ATS.WARNCNT") == 0)
+	{
+		TRIGGERVALUES triggerValues = { triggermap->AX_X.ATS.WARNCNT, triggermap->AX_Y.ATS.WARNCNT, triggermap->AX_Z.ATS.WARNCNT, triggermap->POV.ATS.WARNCNT, triggermap->BT.ATS.WARNCNT };
 		return validateButtonInputs(js, buttonStrText, triggerValues);
 	}
 

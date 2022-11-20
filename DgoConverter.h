@@ -20,18 +20,21 @@ typedef struct ats {
 	WORD CONF;
 	WORD RESNORM;
 	WORD RESEMER;
+	WORD WARNCNT;
 }ATSINFO;
 
 typedef struct AtsBool {
 	bool CONF;
 	bool RESNORM;
 	bool RESEMER;
+	bool WARNCNT;
 }ATSBOOL;
 
 typedef struct AtsWchar {
 	WCHAR CONF[NAME_SIZE];
 	WCHAR RESNORM[NAME_SIZE];
 	WCHAR RESEMER[NAME_SIZE];
+	WCHAR WARNCNT[NAME_SIZE];
 }ATSWCHAR;
 
 typedef struct MasconConfig {
