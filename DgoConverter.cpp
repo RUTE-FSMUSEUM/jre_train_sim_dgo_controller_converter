@@ -49,6 +49,7 @@ VOID makeButtonInputArray( INPUT* inputs, INPUT* release, int* idx_inputs, int* 
 bool validateMasconState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
 bool validateButtonState( WCHAR* validateState, const TCHAR* buttonStrText, const DIJOYSTATE2 js, KEYTRIGGERINFO* triggermap );
 bool validateMasconInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues );
+bool validateButtonInputs( const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues );
 
 // Stuff to filter out XInput devices
 #include <wbemidl.h>
@@ -1403,8 +1404,13 @@ bool validateButtonState(WCHAR* validateState, const TCHAR* buttonStrText, const
 	}
 	return FALSE;
 }
+
+
 //-----------------------------------------------------------------------------
-bool validateNonMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
+// Name: validateButtonInputs()
+// Desc: Validate Input (AX_X, AX_Y, AX_Z, Buttons etc.) for buttons.
+//-----------------------------------------------------------------------------
+bool validateButtonInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, TRIGGERVALUES triggerValues)
 {
 	validateInputResult result[NUM_VALIDATE] = { NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED, NOT_VALIDATED }; // { AX_X, AX_Y, AX_Z, BT }
 
@@ -1427,11 +1433,17 @@ bool validateNonMasconInputs(const DIJOYSTATE2 js, const TCHAR* buttonStrText, T
 	else if (js.lZ == _wtol(triggerValues.AX_Z))
 		result[2] = VALIDATED;
 
+	// Validate POV
+	if (wcscmp(triggerValues.POV, NOT_IN_USE) == 0)
+		result[3] = NOT_ASSIGNED;
+	else if (js.rgdwPOV[0] == _wtol(triggerValues.POV))
+		result[3] = VALIDATED;
+
 	// Validate BT (Buttons)
 	if ( wcscmp( triggerValues.BT, NOT_IN_USE ) == 0 )
-		result[3] = NOT_ASSIGNED;
+		result[4] = NOT_ASSIGNED;
 	else if ( wcschr( buttonStrText, *(triggerValues.BT) ) != NULL )
-		result[3] = VALIDATED;
+		result[4] = VALIDATED;
 
 	// Judgement
 	int NUM_NOT_ASSIGNED = 0;
