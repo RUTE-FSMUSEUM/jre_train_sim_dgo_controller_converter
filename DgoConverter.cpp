@@ -1074,7 +1074,7 @@ VOID makeMasconKeyBoardOutput( INPUT* inputs, INPUT* release, int* idx_inputs, i
 	if ( inputs[*idx_inputs].ki.wVk != keymap->NUL )
 	{
 		// input[0]
-		inputs[(*idx_inputs)++].type = INPUT_KEYBOARD;
+		inputs[(*idx_inputs)].type = INPUT_KEYBOARD;
 		// input[1]
 		release[*idx_release].ki.wVk = inputs[(*idx_inputs)++].ki.wVk;
 		release[*idx_release].type = INPUT_KEYBOARD;
