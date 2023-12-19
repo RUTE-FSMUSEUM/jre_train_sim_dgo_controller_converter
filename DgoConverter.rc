@@ -25,8 +25,8 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,6,3
- PRODUCTVERSION 0,0,6,3
+ FILEVERSION 0,0,6,4
+ PRODUCTVERSION 0,0,6,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -43,12 +43,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "FSMUSEUM"
             VALUE "FileDescription", "JR EAST TRAIN SIMULATOR DGo(PS1)/ZUIKI Controller Input Converter"
-            VALUE "FileVersion", "0.0.6.3"
+            VALUE "FileVersion", "0.0.6.4"
             VALUE "InternalName", "DgoConverter.exe"
             VALUE "LegalCopyright", "Copyright (C) 2022 FSMUSEUM ALL RIGHTS RESERVED."
             VALUE "OriginalFilename", "DgoConverter.exe"
             VALUE "ProductName", "JR EAST TRAIN SIMULATOR DGo(PS1)/ZUIKI Controller Input Converter"
-            VALUE "ProductVersion", "0.0.6.3"
+            VALUE "ProductVersion", "0.0.6.4"
         END
     END
     BLOCK "VarFileInfo"
