@@ -45,7 +45,7 @@ BEGIN
             VALUE "FileDescription", "JR EAST TRAIN SIMULATOR DGo(PS1)/ZUIKI Controller Input Converter"
             VALUE "FileVersion", "0.0.6.4"
             VALUE "InternalName", "DgoConverter.exe"
-            VALUE "LegalCopyright", "Copyright (C) 2022 FSMUSEUM ALL RIGHTS RESERVED."
+            VALUE "LegalCopyright", "Copyright (C) 2023-2024 FSMUSEUM ALL RIGHTS RESERVED."
             VALUE "OriginalFilename", "DgoConverter.exe"
             VALUE "ProductName", "JR EAST TRAIN SIMULATOR DGo(PS1)/ZUIKI Controller Input Converter"
             VALUE "ProductVersion", "0.0.6.4"
